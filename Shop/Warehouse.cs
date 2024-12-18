@@ -107,9 +107,12 @@ namespace LearningCode
 
         public void UpdateStock(ProductType productType, Product product, int quantity)
         {
-            stock[productType][product.Name] = quantity;
+            stock[productType].Add(product.Name,quantity);
         }
-        
+        public Product? FindProductByName(string name)
+        {
+            return _products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
         
     }
 

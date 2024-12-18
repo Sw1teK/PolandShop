@@ -14,7 +14,9 @@ namespace LearningCode
     {
         static void Main(string[] strs)
         {
-            Menu menu = new Menu();
+            Warehouse warehouse = new Warehouse();
+            Cart.Cart cart = new Cart.Cart(warehouse);
+            Menu menu = new Menu(warehouse, cart);
             menu.CaseMenu();
 
         }

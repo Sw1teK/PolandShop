@@ -11,6 +11,6 @@ namespace LearningCode.Cart
 
         void ViewCart();
 
-        void Checkout(Product product);
+        void Checkout();
     }
 }

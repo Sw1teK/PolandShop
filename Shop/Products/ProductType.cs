@@ -2,7 +2,7 @@
 {
     public enum ProductType
     {
-        Phone,
+        Phone = 1,
         Clothes,
         Vegetables 
     }

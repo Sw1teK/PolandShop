@@ -9,13 +9,20 @@ namespace LearningCode.Cart
 {
     public class Cart : ICart
     {
+        private readonly Warehouse _warehouse;
+        
         public List<(Product product, int quantity)> cartProducts = new List<(Product product, int quantity)>();
-        Warehouse warehouse = new Warehouse();
+        
         public List<Order> orderHistory = new List<Order>();
+
+        public Cart(Warehouse warehouse)
+        {
+            _warehouse = warehouse;
+        }
 
         public void AddToCart(Product product, int quantity, ProductType productType)
         {
-            var availableQuantity = warehouse.GetAvailebleQuantity(product, productType);
+            var availableQuantity = _warehouse.GetAvailebleQuantity(product, productType);
             if (availableQuantity < quantity)
             {
                 Console.WriteLine("Ты долбаёб, посмотри сколько товара доступно.");
@@ -40,11 +47,11 @@ namespace LearningCode.Cart
             else
             {
                 cartProducts.Add((product, quantity)); // Если нет такого продукта в корзине
-                warehouse.DecreaseStock(product, productType, quantity);
+                _warehouse.DecreaseStock(product, productType, quantity);
             }
         }
 
-        public void RemoveFromCart(Product product, ProductType productType, int quantity)
+        public void RemoveFromCart(Product product, ProductType productType, int quantityToRemove)
         {
             var productInCart = cartProducts.FirstOrDefault(c => c.product == product);
             if (productInCart == default)
@@ -53,7 +60,7 @@ namespace LearningCode.Cart
                 return;
             }
 
-            int quantityToRemove = 0; // Сколько товара хочет удалить клиент
+            //int quantityToRemove = 0; // Сколько товара хочет удалить клиент
             int quantityInCart = productInCart.quantity; // Сколько товара в корзине
             if (quantityInCart < quantityToRemove) // Проверка: Есть ли столько товара в корзине чтобы его удалить
             {
@@ -69,10 +76,10 @@ namespace LearningCode.Cart
             }
             else
             {
-                cartProducts.Remove((product, quantity));
+                cartProducts.Remove((product, quantityToRemove));
             }
 
-            warehouse.IncreaseStock(product, productType, quantity);
+            _warehouse.IncreaseStock(product, productType, quantityToRemove);
         }
 
         public void ViewCart()
@@ -89,7 +96,7 @@ namespace LearningCode.Cart
             }
         }
 
-        public void Checkout(Product product)
+        public void Checkout()
         {
             if (!cartProducts.Any())
             {
@@ -98,17 +105,24 @@ namespace LearningCode.Cart
             }
 
             int totalCost = 0;
-
-            foreach (var (product1, existingQuantity) in cartProducts)
+            Console.WriteLine("Вы выбрали такие товары.");
+            foreach (var (productCheckout, existingQuantity) in cartProducts)
             {
-                totalCost += product.Price * existingQuantity;
+                Console.WriteLine($"{productCheckout.Name} - {existingQuantity} штук.");
             }
 
+            foreach (var (productCheckout, existingQuantity) in cartProducts)
+            {
+                totalCost += productCheckout.Price * existingQuantity;
+            }
+
+            Console.WriteLine($"Итоговая стоимость составила: {totalCost} руб.");
             orderHistory.Add(new Order
             {
                 TotalCost = totalCost,
                 Products = new List<(Product product, int quantity)>(cartProducts)
             });
+            cartProducts.Clear();
         }
 
         public void ViewOrderHistory()
@@ -119,8 +133,12 @@ namespace LearningCode.Cart
                 return;
             }
 
+            int a = 1;
+
             foreach (var history in orderHistory)
             {
+                Console.WriteLine($"Покупка {a}");
+                a++;
                 foreach (var (product, quantity) in history.Products)
                 {
                     Console.WriteLine(product.Name, quantity);
