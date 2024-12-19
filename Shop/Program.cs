@@ -16,9 +16,11 @@ namespace LearningCode
         {
             Warehouse warehouse = new Warehouse();
             Cart.Cart cart = new Cart.Cart(warehouse);
-            Menu menu = new Menu(warehouse, cart);
+            RefactoringMainMenu refactoringMainMenu = new RefactoringMainMenu(warehouse, cart);
+            RefactoringCatalogMenu refactoringCatalogMenu = new RefactoringCatalogMenu(warehouse);
+            RefactoringCartMenu refactoringCartMenu = new RefactoringCartMenu(warehouse, cart);
+            Menu menu = new Menu(warehouse, cart, refactoringMainMenu, refactoringCatalogMenu, refactoringCartMenu);
             menu.CaseMenu();
-
         }
     }
     

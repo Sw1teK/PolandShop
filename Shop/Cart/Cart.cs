@@ -9,17 +9,17 @@ namespace LearningCode.Cart
 {
     public class Cart : ICart
     {
+        private List<(Product product, int quantity)> cartProducts = new List<(Product product, int quantity)>();
+        
+        private List<Order> orderHistory = new List<Order>();
+        
         private readonly Warehouse _warehouse;
-        
-        public List<(Product product, int quantity)> cartProducts = new List<(Product product, int quantity)>();
-        
-        public List<Order> orderHistory = new List<Order>();
 
         public Cart(Warehouse warehouse)
         {
             _warehouse = warehouse;
         }
-
+        
         public void AddToCart(Product product, int quantity, ProductType productType)
         {
             var availableQuantity = _warehouse.GetAvailebleQuantity(product, productType);
@@ -32,7 +32,7 @@ namespace LearningCode.Cart
             var availableProduct = cartProducts.FirstOrDefault(c => c.product == product);
             if (availableProduct != default)
             {
-                int index = cartProducts.FindIndex(c => c.product == product);
+                var index = cartProducts.FindIndex(c => c.product == product);
                 if (index >= 0)
                 {
                     var (existingProduct, existingQuantity) =
@@ -50,7 +50,7 @@ namespace LearningCode.Cart
                 _warehouse.DecreaseStock(product, productType, quantity);
             }
         }
-
+        
         public void RemoveFromCart(Product product, ProductType productType, int quantityToRemove)
         {
             var productInCart = cartProducts.FirstOrDefault(c => c.product == product);
@@ -59,8 +59,7 @@ namespace LearningCode.Cart
                 Console.WriteLine("Товара нет!");
                 return;
             }
-
-            //int quantityToRemove = 0; // Сколько товара хочет удалить клиент
+            
             int quantityInCart = productInCart.quantity; // Сколько товара в корзине
             if (quantityInCart < quantityToRemove) // Проверка: Есть ли столько товара в корзине чтобы его удалить
             {
@@ -132,9 +131,7 @@ namespace LearningCode.Cart
                 Console.WriteLine("Купи что-нибудь, Чмо(Скризя)!");
                 return;
             }
-
             int a = 1;
-
             foreach (var history in orderHistory)
             {
                 Console.WriteLine($"Покупка {a}");
@@ -143,10 +140,8 @@ namespace LearningCode.Cart
                 {
                     Console.WriteLine(product.Name, quantity);
                 }
-
                 Console.WriteLine(history.TotalCost);
             }
-
         }
     }
 }    
