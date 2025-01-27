@@ -2,8 +2,10 @@
 {
     public class Vegetables : Product
     {
-        public Vegetables(string name, int id, int price) : base(name,  id, price){}
+        public Vegetables(string name, int id, int price) : base(name, price, id)
+        {
+            ProductType = ProductType.Vegetables;
+        }
         
-        public  ProductType ProductType = ProductType.Vegetables;
     }
 }

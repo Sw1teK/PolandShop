@@ -24,14 +24,6 @@ public class RefactoringCatalogMenu
 
     public int AddProdutToCatalogMenu()
     {
-         Console.Write("Введите ID товара: ");
-         if (!int.TryParse(Console.ReadLine(), out int id))
-         {
-             Console.WriteLine("Некорректный ID.");
-             Console.ReadLine();
-             Console.Clear();
-             return 0;
-         }
 
          Console.Write("Введите название товара: ");
          string? name = Console.ReadLine();
@@ -71,13 +63,13 @@ public class RefactoringCatalogMenu
                  switch (productType)
                  {
                      case ProductType.Vegetables:
-                         product = new Vegetables(name,id , price);
+                         product = new Vegetables(name,0, price);
                          break;
                      case ProductType.Phone:
-                         product = new Phone(name, id, price);
+                         product = new Phone(name, 0, price);
                          break;
                      case ProductType.Clothes:
-                         product = new Clothes(name, id, price);
+                         product = new Clothes(name, 0, price);
                          break;
                      default:
                          Console.WriteLine("Неподдерживаемый тип товара.");
@@ -85,8 +77,8 @@ public class RefactoringCatalogMenu
                          Console.Clear();
                          return 0;
                  }
-                 _warehouse.AddProduct(product);
-                 _warehouse.UpdateStock(productType, product, quantity);
+                 _warehouse.AddProduct(product, quantity);
+                 _warehouse.UpdateStock( product, quantity);
                  Console.WriteLine("Товар добавлен.");
              }
              else
@@ -112,7 +104,17 @@ public class RefactoringCatalogMenu
             Console.Clear();
             return 0;
         }
-        _warehouse.RemoveProduct(productName);
+        
+        var product = _warehouse.FindProductByName(productName);
+        if (product == null)
+        {
+            Console.WriteLine("Такого товара нет.");
+            Console.ReadLine();
+            Console.Clear();
+            return 0;
+        }
+        _warehouse.RemoveProduct(product.Id);
+        Console.WriteLine("Товар удалён.");
         Console.ReadLine();
         Console.Clear();
         return 0;

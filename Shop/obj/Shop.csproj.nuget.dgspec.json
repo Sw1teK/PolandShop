@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CSlight\\PolandShop\\Shop\\Shop.csproj": {}
+    "C:\\Users\\Danik\\RiderProjects\\PolandShop\\Shop\\Shop.csproj": {}
   },
   "projects": {
-    "D:\\CSlight\\PolandShop\\Shop\\Shop.csproj": {
+    "C:\\Users\\Danik\\RiderProjects\\PolandShop\\Shop\\Shop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSlight\\PolandShop\\Shop\\Shop.csproj",
+        "projectUniqueName": "C:\\Users\\Danik\\RiderProjects\\PolandShop\\Shop\\Shop.csproj",
         "projectName": "Shop",
-        "projectPath": "D:\\CSlight\\PolandShop\\Shop\\Shop.csproj",
-        "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-        "outputPath": "D:\\CSlight\\PolandShop\\Shop\\obj\\",
+        "projectPath": "C:\\Users\\Danik\\RiderProjects\\PolandShop\\Shop\\Shop.csproj",
+        "packagesPath": "C:\\Users\\Danik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Danik\\RiderProjects\\PolandShop\\Shop\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Danik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,6 +45,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.35, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.0.0-preview3.24332.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -64,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

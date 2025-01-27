@@ -19,10 +19,9 @@ namespace LearningCode.Cart
         {
             _warehouse = warehouse;
         }
-        
         public void AddToCart(Product product, int quantity, ProductType productType)
         {
-            var availableQuantity = _warehouse.GetAvailebleQuantity(product, productType);
+            var availableQuantity = _warehouse.GetAvailebleQuantity(product.Id);
             if (availableQuantity < quantity)
             {
                 Console.WriteLine("Ты долбаёб, посмотри сколько товара доступно.");
@@ -39,16 +38,14 @@ namespace LearningCode.Cart
                         cartProducts
                             [index]; // в cartProduct  два параметра, присваеваем один параметр existingProduct, а второй existingQauntity
                     cartProducts[index] =
-                        (product,
-                            existingQuantity +
-                            quantity); // Если продукт уже есть в корзине добавляем к нему новое число продуктов
+                        (product, existingQuantity + quantity); // Если продукт уже есть в корзине добавляем к нему новое число продуктов
                 }
             }
             else
             {
                 cartProducts.Add((product, quantity)); // Если нет такого продукта в корзине
-                _warehouse.DecreaseStock(product, productType, quantity);
             }
+            _warehouse.DecreaseStock(product.Id, quantity);
         }
         
         public void RemoveFromCart(Product product, ProductType productType, int quantityToRemove)
@@ -78,7 +75,7 @@ namespace LearningCode.Cart
                 cartProducts.Remove((product, quantityToRemove));
             }
 
-            _warehouse.IncreaseStock(product, productType, quantityToRemove);
+            _warehouse.IncreaseStock(product.Id, quantityToRemove);
         }
 
         public void ViewCart()

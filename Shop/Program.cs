@@ -7,6 +7,7 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using LearningCode.Products;
+using Dapper;
 
 namespace LearningCode
 {
@@ -14,7 +15,8 @@ namespace LearningCode
     {
         static void Main(string[] strs)
         {
-            Warehouse warehouse = new Warehouse();
+            string connectionString = "Server=DESKTOP-TF2SL2E;Database=PolandShop;Trusted_Connection=True; TrustServerCertificate=True;";
+            var warehouse = new Warehouse(connectionString);
             Cart.Cart cart = new Cart.Cart(warehouse);
             RefactoringMainMenu refactoringMainMenu = new RefactoringMainMenu(warehouse, cart);
             RefactoringCatalogMenu refactoringCatalogMenu = new RefactoringCatalogMenu(warehouse);

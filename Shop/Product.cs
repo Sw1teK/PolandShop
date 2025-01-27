@@ -4,7 +4,7 @@ namespace LearningCode
 {
     
     
-    public abstract class Product
+    public class Product
     {
         public  ProductType ProductType { get; protected set; }
         
@@ -14,11 +14,16 @@ namespace LearningCode
         
         public int Price { get; private set; }
         
-        public Product(string name,int id, int price)
+        public Product(string name, int price, int id)
         {
-            Id = id;
-            Price = price;
             Name = name;
+            Price = price;
+            Id = id;
+        }
+
+        public Product()
+        {
+            
         }
     }
 }
